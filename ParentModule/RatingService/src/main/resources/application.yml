@@ -4,9 +4,11 @@ server:
 spring:
   data:
     mongodb:
-      host: localhost
-      port: 27017
-      database: Rating
+      uri: mongodb+srv://prathameshmk111:admin11@cluster-1.uexei3j.mongodb.net/Rating
+
+      
+
+
   application:
     name: RatingService
 

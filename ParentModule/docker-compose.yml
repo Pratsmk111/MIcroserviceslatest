@@ -1,0 +1,90 @@
+version: '3'
+
+services:
+
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - my-network
+
+  # Eureka Server
+  eureka-server:
+    image: serviceregistry-image
+    ports:
+      - "8761:8761"
+    networks:
+      - my-network
+
+  # API Gateway
+  api-gateway:
+    image: apigateway-image
+    ports:
+      - "8083:8083"
+    depends_on:
+      - eureka-server
+    networks:
+      - my-network
+    environment:
+      SPRING_APPLICATION_JSON: '{"eureka":{"client":{"serviceUrl":{"defaultZone":"http://eureka-server:8761/eureka"}}}}'
+
+
+  # Identity Service
+  identity-service:
+    image: identityservice-image
+    ports:
+      - "8084:8084"
+    depends_on:
+      - eureka-server
+    networks:
+      - my-network
+    environment:
+       SPRING_APPLICATION_JSON: '{"eureka":{"client":{"serviceUrl":{"defaultZone":"http://eureka-server:8761/eureka"}}}}'
+
+
+    
+
+  # User Service
+  userservice:
+    image: userservice-image
+    ports:
+      - "8080:8080"
+    depends_on:
+      - eureka-server
+    networks:
+      - my-network
+    environment:
+       SPRING_APPLICATION_JSON: '{"eureka":{"client":{"serviceUrl":{"defaultZone":"http://eureka-server:8761/eureka"}}}}'
+
+
+  # Rating Service
+  ratingservice:
+    image: ratingservice-image
+    ports:
+      - "8181:8181"
+    depends_on:
+      - eureka-server
+    networks:
+      - my-network
+    environment:
+       SPRING_APPLICATION_JSON: '{"eureka":{"client":{"serviceUrl":{"defaultZone":"http://eureka-server:8761/eureka"}}}}'
+
+
+
+  # Hotel Service
+  hotelservice:
+    image: hotelservice-image
+    ports:
+      - "8282:8282"
+    depends_on:
+      - eureka-server
+    networks:
+      - my-network
+    environment:
+       SPRING_APPLICATION_JSON: '{"eureka":{"client":{"serviceUrl":{"defaultZone":"http://eureka-server:8761/eureka"}}}}'
+
+
+
+networks:
+  my-network:

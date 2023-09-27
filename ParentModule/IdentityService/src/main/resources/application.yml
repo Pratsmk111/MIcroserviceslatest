@@ -1,14 +1,18 @@
 spring:
   application:
     name: IDENTITY-SERVICE
+
   data:
     mongodb:
-      host: localhost
-      port: 27017
-      database: Userdata
+      uri: mongodb+srv://prathameshmk111:admin11@cluster-1.uexei3j.mongodb.net/Userdata
+
+
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka
 server:
   port: 8084
+
+  
+  
