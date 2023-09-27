@@ -11,5 +11,9 @@
   	<module>HotelService</module>
   	<module>ApiGateway</module>
   	<module>IdentityService</module>
+  	<module>HotelBookingservice</module>
+  	<module>HotelBookingService</module>
+  	<module>hotelbookingservice1</module>
+  	<module>Bookingservice</module>
   </modules>
 </project>
